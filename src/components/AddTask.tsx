@@ -14,8 +14,6 @@ export const AddTask = observer(() => {
     taskStore.setNewTaskText(newText);
   };
 
-  console.log(taskStore.newTaskText);
-
   return (
     <>
       <TextInput

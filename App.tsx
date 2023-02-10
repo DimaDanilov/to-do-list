@@ -1,8 +1,8 @@
 import {observer} from 'mobx-react-lite';
-import React, {useEffect} from 'react';
+import React from 'react';
 import {FlatList, SafeAreaView, StyleSheet, Text} from 'react-native';
-import {AddTask} from './components/AddTask';
-import {useTaskStore} from './store/TaskStore';
+import {AddTask} from './src/components/AddTask';
+import {useTaskStore} from './src/store/TaskStore';
 
 export const App = observer(() => {
   const taskStore = useTaskStore();
