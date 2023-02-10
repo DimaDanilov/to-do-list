@@ -1,5 +1,5 @@
 import {Button, TextInput} from 'react-native';
-import {useTaskStore} from '../store/TaskStore';
+import {useTaskStore} from '../../store/TaskStore';
 import {observer} from 'mobx-react-lite';
 
 export const AddTask = observer(() => {
@@ -10,8 +10,8 @@ export const AddTask = observer(() => {
     taskStore.setNewTaskText('');
   };
 
-  const onChangeHandler = (newText: string) => {
-    taskStore.setNewTaskText(newText);
+  const onChangeHandler = (text: string) => {
+    taskStore.setNewTaskText(text);
   };
 
   return (

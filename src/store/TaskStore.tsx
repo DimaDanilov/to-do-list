@@ -14,7 +14,9 @@ class TaskStore {
       task: 'Pass the exam',
     },
   ];
+  filteredToDoList: Task[] = [...this.toDoList];
   newTaskText: string = '';
+  searchTaskText: string = '';
 
   constructor() {
     makeAutoObservable(this);
@@ -33,6 +35,18 @@ class TaskStore {
   // Change text field content variable
   setNewTaskText(text: string) {
     this.newTaskText = text;
+  }
+
+  // Change search field content variable
+  setSearchTaskText(text: string) {
+    this.searchTaskText = text;
+  }
+
+  // Check if search request contains in tasks
+  filterToDoList() {
+    this.filteredToDoList = this.toDoList.filter(el =>
+      el.task.toLowerCase().includes(this.searchTaskText.toLowerCase()),
+    );
   }
 }
 

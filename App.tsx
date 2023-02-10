@@ -1,7 +1,8 @@
 import {observer} from 'mobx-react-lite';
 import React from 'react';
 import {FlatList, SafeAreaView, StyleSheet, Text} from 'react-native';
-import {AddTask} from './src/components/AddTask';
+import {AddTask} from './src/components/MainPage/AddTask';
+import {SearchTask} from './src/components/MainPage/SearchTask';
 import {useTaskStore} from './src/store/TaskStore';
 
 export const App = observer(() => {
@@ -10,8 +11,13 @@ export const App = observer(() => {
   return (
     <SafeAreaView>
       <AddTask />
+      <SearchTask />
       <FlatList
-        data={taskStore.toDoList}
+        data={
+          taskStore.searchTaskText
+            ? taskStore.filteredToDoList
+            : taskStore.toDoList
+        }
         renderItem={({item}) => <Text>{item.task}</Text>}
       />
     </SafeAreaView>
