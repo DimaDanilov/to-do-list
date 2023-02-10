@@ -1,55 +1,22 @@
-import React, {useState} from 'react';
-import {
-  Button,
-  FlatList,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TextInput,
-} from 'react-native';
+import {observer} from 'mobx-react-lite';
+import React, {useEffect} from 'react';
+import {FlatList, SafeAreaView, StyleSheet, Text} from 'react-native';
+import {AddTask} from './components/AddTask';
+import {useTaskStore} from './store/TaskStore';
 
-function App(): JSX.Element {
-  const [newTaskText, setNewTaskText] = useState('');
-  const [toDoList, setToDoList] = useState([
-    {
-      task: 'Make breakfast',
-    },
-    {
-      task: 'Clean clothes',
-    },
-    {
-      task: 'Pass the exam',
-    },
-  ]);
-
-  const onClickHandler = () => {
-    setToDoList([
-      ...toDoList,
-      {
-        task: newTaskText,
-      },
-    ]);
-    setNewTaskText('');
-  };
-
-  const onChangeHandler = (newText: string) => {
-    setNewTaskText(newText);
-  };
+export const App = observer(() => {
+  const taskStore = useTaskStore();
 
   return (
     <SafeAreaView>
-      <TextInput
-        onChangeText={newText => onChangeHandler(newText)}
-        value={newTaskText}
-      />
+      <AddTask />
       <FlatList
-        data={toDoList}
+        data={taskStore.toDoList}
         renderItem={({item}) => <Text>{item.task}</Text>}
       />
-      <Button onPress={onClickHandler} title="Add task" />
     </SafeAreaView>
   );
-}
+});
 
 const styles = StyleSheet.create({
   sectionContainer: {
@@ -69,5 +36,3 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 });
-
-export default App;
