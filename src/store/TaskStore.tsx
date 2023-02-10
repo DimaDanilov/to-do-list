@@ -6,12 +6,21 @@ class TaskStore {
   toDoList: Task[] = [
     {
       task: 'Make breakfast',
+      description: 'Tasty eggs and my favourite bread as always',
+      priority: 3,
+      completed: true,
     },
     {
       task: 'Clean clothes',
+      description: 'My jeans are too dirty, damn',
+      priority: 1,
+      completed: false,
     },
     {
       task: 'Pass the exam',
+      description: 'I want to pass math exam. I think I should get ready to it',
+      priority: 1,
+      completed: false,
     },
   ];
   filteredToDoList: Task[] = [...this.toDoList];
@@ -28,6 +37,9 @@ class TaskStore {
       ...this.toDoList,
       {
         task: this.newTaskText,
+        description: '',
+        priority: 0,
+        completed: false,
       },
     ];
   }
