@@ -1,9 +1,9 @@
-import {makeAutoObservable} from 'mobx';
 import React from 'react';
+import {makeAutoObservable} from 'mobx';
+import {Task} from '../../models/Task';
 import uuid from 'react-uuid';
-import {Task} from '../models/Task';
 
-class TaskStore {
+class MainStore {
   toDoList: Task[] = [
     {
       id: uuid(),
@@ -30,45 +30,6 @@ class TaskStore {
   filteredToDoList: Task[] = [...this.toDoList];
   newTaskText: string = '';
   searchTaskText: string = '';
-  currentTask: Task = {
-    id: '',
-    task: '',
-    description: '',
-    priority: 0,
-    completed: false,
-  };
-
-  setCurrentTask(task: Task) {
-    this.currentTask = {...task};
-  }
-
-  setCurrentTaskField(field: string, value: string) {
-    if (this.currentTask) {
-      if (field === 'title') {
-        this.currentTask.task = value;
-      }
-      if (field === 'description') {
-        this.currentTask.description = value;
-      }
-    }
-  }
-
-  setCurrentTaskPriority(priority: number) {
-    if (this.currentTask) {
-      this.currentTask.priority = priority;
-    }
-  }
-  setCurrentTaskCompletition() {
-    if (this.currentTask) {
-      this.currentTask.completed = !this.currentTask.completed;
-    }
-  }
-
-  saveChangesInTask() {
-    this.toDoList = this.toDoList.map(obj =>
-      obj.id === this.currentTask.id ? (obj = {...this.currentTask}) : obj,
-    );
-  }
 
   constructor() {
     makeAutoObservable(this);
@@ -104,17 +65,13 @@ class TaskStore {
       el.task.toLowerCase().includes(this.searchTaskText.toLowerCase()),
     );
   }
-
-  deleteTask(idToRemove: string) {
-    this.toDoList = this.toDoList.filter(el => el.id !== idToRemove);
-  }
 }
 
-export const TaskStoreInstance = new TaskStore();
-const TaskStoreContext = React.createContext(TaskStoreInstance);
+export const MainStoreInstance = new MainStore();
+const MainStoreContext = React.createContext(MainStoreInstance);
 
-export const useTaskStore = () => {
-  return React.useContext(TaskStoreContext);
+export const useMainStore = () => {
+  return React.useContext(MainStoreContext);
 };
 
-export default new TaskStore();
+export default new MainStore();

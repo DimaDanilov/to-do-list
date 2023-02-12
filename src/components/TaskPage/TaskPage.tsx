@@ -10,7 +10,7 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import {RootStackParamList} from '../../Navigate';
-import {useTaskStore} from '../../store/TaskStore';
+import {useTaskStore} from './TaskStore';
 
 type TaskPageProps = NativeStackScreenProps<RootStackParamList, 'Task'>;
 
@@ -62,10 +62,6 @@ const TaskPage = observer(({navigation, route}: TaskPageProps) => {
     taskStore.setCurrentTask(route.params.task);
   }, []);
 
-  const onChangeTextHandler = (field: string, newText: string) => {
-    taskStore.setCurrentTaskField(field, newText);
-  };
-
   const onEditClickHandler = () => {
     if (isEditing) {
       taskStore.saveChangesInTask();
@@ -83,12 +79,12 @@ const TaskPage = observer(({navigation, route}: TaskPageProps) => {
       <TextInput
         value={taskStore.currentTask.task}
         editable={isEditing}
-        onChangeText={text => onChangeTextHandler('title', text)}
+        onChangeText={text => taskStore.setCurrentTaskTitle(text)}
       />
       <TextInput
         value={taskStore.currentTask.description}
         editable={isEditing}
-        onChangeText={text => onChangeTextHandler('description', text)}
+        onChangeText={text => taskStore.setCurrentTaskDescription(text)}
       />
       <RadioButton
         value="0"

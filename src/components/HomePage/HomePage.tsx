@@ -1,6 +1,6 @@
-import {useTaskStore} from '../../store/TaskStore';
+import {useMainStore} from './HomeStore';
 import {observer} from 'mobx-react-lite';
-import {SafeAreaView, FlatList, Button} from 'react-native';
+import {SafeAreaView, FlatList} from 'react-native';
 import {SearchTask} from './subcomponents/SearchTask';
 import {AddTask} from './subcomponents/AddTask';
 import {TaskItem} from './subcomponents/TaskItem';
@@ -10,16 +10,16 @@ import {RootStackParamList} from '../../Navigate';
 type HomePageProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 const HomePage = observer(({navigation}: HomePageProps) => {
-  const taskStore = useTaskStore();
+  const mainStore = useMainStore();
   return (
     <SafeAreaView>
       <AddTask />
       <SearchTask />
       <FlatList
         data={
-          taskStore.searchTaskText
-            ? taskStore.filteredToDoList
-            : taskStore.toDoList
+          mainStore.searchTaskText
+            ? mainStore.filteredToDoList
+            : mainStore.toDoList
         }
         renderItem={({item}) => (
           <TaskItem task={item} navigation={navigation} />

@@ -1,24 +1,24 @@
 import {Button, TextInput} from 'react-native';
 import {observer} from 'mobx-react-lite';
-import {useTaskStore} from '../../../store/TaskStore';
+import {useMainStore} from '../HomeStore';
 
 export const SearchTask = observer(() => {
-  const taskStore = useTaskStore();
+  const mainStore = useMainStore();
 
   const onChangeHandler = (text: string) => {
-    taskStore.setSearchTaskText(text);
-    taskStore.filterToDoList();
+    mainStore.setSearchTaskText(text);
+    mainStore.filterToDoList();
   };
 
   const onClickHandler = () => {
-    taskStore.setSearchTaskText('');
+    mainStore.setSearchTaskText('');
   };
 
   return (
     <>
       <TextInput
         onChangeText={newText => onChangeHandler(newText)}
-        value={taskStore.searchTaskText}
+        value={mainStore.searchTaskText}
       />
       <Button onPress={onClickHandler} title="Clean search" />
     </>
