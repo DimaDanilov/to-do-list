@@ -30,6 +30,45 @@ class TaskStore {
   filteredToDoList: Task[] = [...this.toDoList];
   newTaskText: string = '';
   searchTaskText: string = '';
+  currentTask: Task = {
+    id: '',
+    task: '',
+    description: '',
+    priority: 0,
+    completed: false,
+  };
+
+  setCurrentTask(task: Task) {
+    this.currentTask = {...task};
+  }
+
+  setCurrentTaskField(field: string, value: string) {
+    if (this.currentTask) {
+      if (field === 'title') {
+        this.currentTask.task = value;
+      }
+      if (field === 'description') {
+        this.currentTask.description = value;
+      }
+    }
+  }
+
+  setCurrentTaskPriority(priority: number) {
+    if (this.currentTask) {
+      this.currentTask.priority = priority;
+    }
+  }
+  setCurrentTaskCompletition() {
+    if (this.currentTask) {
+      this.currentTask.completed = !this.currentTask.completed;
+    }
+  }
+
+  saveChangesInTask() {
+    this.toDoList = this.toDoList.map(obj =>
+      obj.id === this.currentTask.id ? (obj = {...this.currentTask}) : obj,
+    );
+  }
 
   constructor() {
     makeAutoObservable(this);
