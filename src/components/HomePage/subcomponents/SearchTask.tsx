@@ -1,6 +1,6 @@
 import {Button, TextInput} from 'react-native';
 import {observer} from 'mobx-react-lite';
-import {useTaskStore} from '../../store/TaskStore';
+import {useTaskStore} from '../../../store/TaskStore';
 
 export const SearchTask = observer(() => {
   const taskStore = useTaskStore();

@@ -1,27 +1,13 @@
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {observer} from 'mobx-react-lite';
 import React from 'react';
-import {FlatList, SafeAreaView, StyleSheet, Text} from 'react-native';
-import {AddTask} from './src/components/MainPage/AddTask';
-import {SearchTask} from './src/components/MainPage/SearchTask';
-import {useTaskStore} from './src/store/TaskStore';
+import {StyleSheet} from 'react-native';
+import MainStack from './src/Navigate';
+
+const Stack = createNativeStackNavigator();
 
 export const App = observer(() => {
-  const taskStore = useTaskStore();
-
-  return (
-    <SafeAreaView>
-      <AddTask />
-      <SearchTask />
-      <FlatList
-        data={
-          taskStore.searchTaskText
-            ? taskStore.filteredToDoList
-            : taskStore.toDoList
-        }
-        renderItem={({item}) => <Text>{item.task}</Text>}
-      />
-    </SafeAreaView>
-  );
+  return <MainStack />;
 });
 
 const styles = StyleSheet.create({
