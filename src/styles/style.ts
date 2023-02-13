@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 export const glStyles = StyleSheet.create({
   screenContainer: {
     flex: 1,
-    justifyContent: 'center',
+    flexDirection: 'column',
     padding: 16,
   },
   section: {
@@ -13,9 +13,22 @@ export const glStyles = StyleSheet.create({
     backgroundColor: '#ffffff',
     color: '#555555',
     width: '100%',
+    marginVertical: 10,
     paddingVertical: 8,
     paddingHorizontal: 10,
     borderColor: '#009688',
+    borderWidth: 1,
+    borderRadius: 10,
+    alignSelf: 'center',
+  },
+  inactiveTextInput: {
+    backgroundColor: '#dadada',
+    color: '#555555',
+    width: '100%',
+    marginVertical: 10,
+    paddingVertical: 8,
+    paddingHorizontal: 10,
+    borderColor: '#939393',
     borderWidth: 1,
     borderRadius: 10,
     alignSelf: 'center',

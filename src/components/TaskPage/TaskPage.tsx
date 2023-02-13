@@ -1,63 +1,21 @@
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {observer} from 'mobx-react-lite';
 import {useState, useEffect} from 'react';
-import {
-  Button,
-  SafeAreaView,
-  Text,
-  TextInput,
-  View,
-  TouchableWithoutFeedback,
-} from 'react-native';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../Navigate';
+import {glStyles} from '../../styles/style';
+import {SafeAreaView, TextInput} from 'react-native';
+import Button from '../../ui/Button';
+import RadioButton from '../../ui/RadioButton';
+import PrioritySection from './PrioritySection';
 import {useTaskStore} from './TaskStore';
 
 type TaskPageProps = NativeStackScreenProps<RootStackParamList, 'Task'>;
-
-interface IRadioButtonProps {
-  value: string;
-  editable: boolean;
-  checked: boolean;
-  onPress: (() => void) | undefined;
-}
-
-function RadioButton({value, editable, checked, onPress}: IRadioButtonProps) {
-  return (
-    <View>
-      <Text>{value}</Text>
-      <TouchableWithoutFeedback onPress={editable ? onPress : undefined}>
-        <View
-          style={[
-            {
-              height: 24,
-              width: 24,
-              borderRadius: 12,
-              borderWidth: 2,
-              borderColor: '#000',
-              alignItems: 'center',
-              justifyContent: 'center',
-            },
-          ]}>
-          {checked ? (
-            <View
-              style={{
-                height: 12,
-                width: 12,
-                borderRadius: 6,
-                backgroundColor: '#000',
-              }}
-            />
-          ) : null}
-        </View>
-      </TouchableWithoutFeedback>
-    </View>
-  );
-}
 
 const TaskPage = observer(({navigation, route}: TaskPageProps) => {
   const taskStore = useTaskStore();
   const [isEditing, setIsEditing] = useState(false);
 
+  // Copy data of current task from all tasks to seperate variable onLoad
   useEffect(() => {
     taskStore.setCurrentTask(route.params.task);
   }, []);
@@ -75,41 +33,21 @@ const TaskPage = observer(({navigation, route}: TaskPageProps) => {
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={glStyles.screenContainer}>
       <TextInput
+        style={isEditing ? glStyles.textInput : glStyles.inactiveTextInput}
         value={taskStore.currentTask.task}
         editable={isEditing}
         onChangeText={text => taskStore.setCurrentTaskTitle(text)}
       />
       <TextInput
+        style={isEditing ? glStyles.textInput : glStyles.inactiveTextInput}
+        multiline
         value={taskStore.currentTask.description}
         editable={isEditing}
         onChangeText={text => taskStore.setCurrentTaskDescription(text)}
       />
-      <RadioButton
-        value="0"
-        editable={isEditing}
-        checked={taskStore.currentTask.priority === 0 ? true : false}
-        onPress={() => taskStore.setCurrentTaskPriority(0)}
-      />
-      <RadioButton
-        value="1"
-        editable={isEditing}
-        checked={taskStore.currentTask.priority === 1 ? true : false}
-        onPress={() => taskStore.setCurrentTaskPriority(1)}
-      />
-      <RadioButton
-        value="2"
-        editable={isEditing}
-        checked={taskStore.currentTask.priority === 2 ? true : false}
-        onPress={() => taskStore.setCurrentTaskPriority(2)}
-      />
-      <RadioButton
-        value="3"
-        editable={isEditing}
-        checked={taskStore.currentTask.priority === 3 ? true : false}
-        onPress={() => taskStore.setCurrentTaskPriority(3)}
-      />
+      <PrioritySection isEditing={isEditing} />
       <RadioButton
         value="Completed"
         editable={isEditing}
@@ -120,7 +58,11 @@ const TaskPage = observer(({navigation, route}: TaskPageProps) => {
         onPress={onEditClickHandler}
         title={isEditing ? 'Save edit' : 'Edit task'}
       />
-      <Button onPress={onDeleteClickHandler} title="Delete task" />
+      <Button
+        color="#F55050"
+        onPress={onDeleteClickHandler}
+        title="Delete task"
+      />
     </SafeAreaView>
   );
 });

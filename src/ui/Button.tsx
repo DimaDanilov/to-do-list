@@ -5,21 +5,24 @@ import {glStyles} from '../styles/style';
 interface IButtonProps {
   onPress?: () => void;
   title?: string;
+  color?: string;
 }
 const buttonStyles = glStyles.button;
 
-const Button = ({onPress, title}: IButtonProps) => {
+const Button = ({onPress, title, color}: IButtonProps) => {
   return (
-    <TouchableOpacity onPress={onPress} style={styles(buttonStyles).container}>
+    <TouchableOpacity
+      onPress={onPress}
+      style={styles(buttonStyles, color).container}>
       <Text style={styles(buttonStyles).text}>{title}</Text>
     </TouchableOpacity>
   );
 };
 
-const styles = (buttonStyles: any) =>
+const styles = (buttonStyles: any, customColor?: string) =>
   StyleSheet.create({
     container: {
-      backgroundColor: buttonStyles.backgroundColor || 'blue',
+      backgroundColor: customColor || buttonStyles.backgroundColor || 'blue',
       borderRadius: buttonStyles.borderRadius || 0,
       marginVertical: buttonStyles.marginVertical || 0,
       marginHorizontal: buttonStyles.marginHorizontal || 0,
