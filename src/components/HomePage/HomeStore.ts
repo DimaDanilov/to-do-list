@@ -37,16 +37,19 @@ class MainStore {
 
   // SET new task to to-do-list
   setToDoList() {
-    this.toDoList = [
-      ...this.toDoList,
-      {
-        id: uuid(),
-        task: this.newTaskText,
-        description: '',
-        priority: 0,
-        completed: false,
-      },
-    ];
+    if (this.newTaskText) {
+      this.toDoList = [
+        ...this.toDoList,
+        {
+          id: uuid(),
+          task: this.newTaskText,
+          description: '',
+          priority: 0,
+          completed: false,
+        },
+      ];
+      this.setNewTaskText('');
+    }
   }
 
   // Change text field content variable

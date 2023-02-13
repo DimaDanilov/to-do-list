@@ -1,13 +1,14 @@
-import {Button, TextInput} from 'react-native';
-import {useMainStore} from '../HomeStore';
 import {observer} from 'mobx-react-lite';
+import {useMainStore} from '../HomeStore';
+import {TextInput, View} from 'react-native';
+import {glStyles} from '../../../styles/style';
+import Button from '../../../ui/Button';
 
 export const AddTask = observer(() => {
   const mainStore = useMainStore();
 
   const onClickHandler = () => {
     mainStore.setToDoList();
-    mainStore.setNewTaskText('');
   };
 
   const onChangeHandler = (text: string) => {
@@ -15,12 +16,14 @@ export const AddTask = observer(() => {
   };
 
   return (
-    <>
+    <View style={glStyles.section}>
       <TextInput
+        style={glStyles.textInput}
         onChangeText={newText => onChangeHandler(newText)}
         value={mainStore.newTaskText}
+        placeholder="Add a new task..."
       />
       <Button onPress={onClickHandler} title="Add task" />
-    </>
+    </View>
   );
 });
