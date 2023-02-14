@@ -3,7 +3,7 @@ import {useState, useEffect} from 'react';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../Navigate';
 import {glStyles} from '../../styles/style';
-import {SafeAreaView, TextInput} from 'react-native';
+import {SafeAreaView, TextInput, ToastAndroid} from 'react-native';
 import Button from '../../ui/Button';
 import RadioButton from '../../ui/RadioButton';
 import PrioritySection from './PrioritySection';
@@ -23,6 +23,7 @@ const TaskPage = observer(({navigation, route}: TaskPageProps) => {
   const onEditClickHandler = () => {
     if (isEditing) {
       taskStore.saveChangesInTask();
+      ToastAndroid.show('Task saved!', ToastAndroid.SHORT);
     }
     setIsEditing(isEditing => !isEditing);
   };
