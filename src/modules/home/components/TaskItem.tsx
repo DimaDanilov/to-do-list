@@ -1,20 +1,20 @@
-import {observer} from 'mobx-react-lite';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../../../Navigate';
+import {RootStackParamList} from '../../../App';
 import {StyleSheet} from 'react-native';
 import {Text, TouchableOpacity} from 'react-native';
 import {Task} from '../../../models/Task';
+import {memo} from 'react';
 
 interface ITaskItemProps {
   navigation: NativeStackNavigationProp<RootStackParamList, 'Home', undefined>;
   task: Task;
 }
 
-export const TaskItem = observer(({navigation, task}: ITaskItemProps) => {
+const TaskItem = memo(({navigation, task}: ITaskItemProps) => {
+  const onPressHandler = () => navigation.navigate('Task', {task});
+
   return (
-    <TouchableOpacity
-      style={styles.taskContainer}
-      onPress={() => navigation.navigate('Task', {task})}>
+    <TouchableOpacity style={styles.taskContainer} onPress={onPressHandler}>
       <Text style={styles.taskText}>{task.task}</Text>
     </TouchableOpacity>
   );
@@ -43,3 +43,5 @@ const styles = StyleSheet.create({
     color: '#555555',
   },
 });
+
+export default TaskItem;

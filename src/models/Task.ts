@@ -6,7 +6,7 @@ export enum TaskPriority {
 }
 
 export interface Task {
-  id: string;
+  id: string; // uses uuid library to generate ID
   task: string;
   description: string;
   priority: TaskPriority;

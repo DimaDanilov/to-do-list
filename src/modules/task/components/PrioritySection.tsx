@@ -1,7 +1,7 @@
 import {observer} from 'mobx-react-lite';
 import {View, Text} from 'react-native';
-import {useTaskStore} from './TaskStore';
-import RadioButton from '../../ui/RadioButton';
+import {useTaskStore} from '../store/TaskStore';
+import RadioButton from '../../../ui/RadioButton';
 import {StyleSheet} from 'react-native';
 
 interface IPrioritySectionProps {
@@ -11,6 +11,12 @@ interface IPrioritySectionProps {
 const PrioritySection = observer(({isEditing}: IPrioritySectionProps) => {
   const taskStore = useTaskStore();
 
+  const onPriorityPressHandler = (some: number) => () => {
+    taskStore.setCurrentTaskPriority(some);
+  };
+
+  const onCompletePressHandler = () => taskStore.setCurrentTaskCompletition();
+
   return (
     <>
       <Text>Priority</Text>
@@ -19,27 +25,33 @@ const PrioritySection = observer(({isEditing}: IPrioritySectionProps) => {
           value="0"
           editable={isEditing}
           checked={taskStore.currentTask.priority === 0 ? true : false}
-          onPress={() => taskStore.setCurrentTaskPriority(0)}
+          onPress={onPriorityPressHandler(0)}
         />
         <RadioButton
           value="1"
           editable={isEditing}
           checked={taskStore.currentTask.priority === 1 ? true : false}
-          onPress={() => taskStore.setCurrentTaskPriority(1)}
+          onPress={onPriorityPressHandler(1)}
         />
         <RadioButton
           value="2"
           editable={isEditing}
           checked={taskStore.currentTask.priority === 2 ? true : false}
-          onPress={() => taskStore.setCurrentTaskPriority(2)}
+          onPress={onPriorityPressHandler(2)}
         />
         <RadioButton
           value="3"
           editable={isEditing}
           checked={taskStore.currentTask.priority === 3 ? true : false}
-          onPress={() => taskStore.setCurrentTaskPriority(3)}
+          onPress={onPriorityPressHandler(3)}
         />
       </View>
+      <RadioButton
+        value="Completed"
+        editable={isEditing}
+        checked={taskStore.currentTask.completed}
+        onPress={onCompletePressHandler}
+      />
     </>
   );
 });

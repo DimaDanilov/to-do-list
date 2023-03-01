@@ -5,37 +5,51 @@ import {glStyles} from '../styles/style';
 interface IButtonProps {
   onPress?: () => void;
   title?: string;
-  color?: string;
 }
-const buttonStyles = glStyles.button;
 
-const Button = ({onPress, title, color}: IButtonProps) => {
+export const Button = ({onPress, title}: IButtonProps) => {
   return (
-    <TouchableOpacity
-      onPress={onPress}
-      style={styles(buttonStyles, color).container}>
-      <Text style={styles(buttonStyles).text}>{title}</Text>
+    <TouchableOpacity onPress={onPress} style={defaultButtonContainerStyle}>
+      <Text style={buttonContainerTextStyle}>{title}</Text>
     </TouchableOpacity>
   );
 };
 
-const styles = (buttonStyles: any, customColor?: string) =>
-  StyleSheet.create({
-    container: {
-      backgroundColor: customColor || buttonStyles.backgroundColor || 'blue',
-      borderRadius: buttonStyles.borderRadius || 0,
-      marginVertical: buttonStyles.marginVertical || 0,
-      marginHorizontal: buttonStyles.marginHorizontal || 0,
-      paddingVertical: buttonStyles.paddingVertical || 4,
-      paddingHorizontal: buttonStyles.paddingHorizontal || 0,
-    },
-    text: {
-      fontSize: buttonStyles.fontSize || 14,
-      color: buttonStyles.color || '#fff',
-      fontWeight: 'bold',
-      alignSelf: 'center',
-      textTransform: 'uppercase',
-    },
-  });
+export const CancelButton = ({onPress, title}: IButtonProps) => {
+  return (
+    <TouchableOpacity onPress={onPress} style={cancelButtonContainerStyle}>
+      <Text style={buttonContainerTextStyle}>{title}</Text>
+    </TouchableOpacity>
+  );
+};
 
-export default Button;
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'blue',
+    borderRadius: 0,
+    marginVertical: 0,
+    marginHorizontal: 0,
+    paddingVertical: 4,
+    paddingHorizontal: 0,
+  },
+  text: {
+    fontSize: 14,
+    color: '#fff',
+    fontWeight: 'bold',
+    alignSelf: 'center',
+    textTransform: 'uppercase',
+  },
+});
+
+const defaultButtonContainerStyle = StyleSheet.compose(
+  styles.container,
+  glStyles.defaultBtnContainer,
+);
+const cancelButtonContainerStyle = StyleSheet.compose(
+  styles.container,
+  glStyles.cancelBtnContainer,
+);
+const buttonContainerTextStyle = StyleSheet.compose(
+  styles.text,
+  glStyles.buttonText,
+);

@@ -33,12 +33,20 @@ export const glStyles = StyleSheet.create({
     borderRadius: 10,
     alignSelf: 'center',
   },
-  button: {
+  defaultBtnContainer: {
     backgroundColor: '#009688',
-    color: '#fff',
-    fontSize: 16,
     borderRadius: 10,
-    paddingVertical: 8,
     marginVertical: 10,
+    paddingVertical: 8,
+  },
+  cancelBtnContainer: {
+    backgroundColor: '#F55050',
+    borderRadius: 10,
+    marginVertical: 10,
+    paddingVertical: 8,
+  },
+  buttonText: {
+    fontSize: 16,
+    color: '#fff',
   },
 });
