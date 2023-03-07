@@ -37,17 +37,23 @@ class TaskStore {
     this.currentTask.completed = !this.currentTask.completed;
   }
 
-  // Replace task in main store with the new one
-  saveChangesInTask() {
-    this.homeStore.toDoList = this.homeStore.toDoList.map(obj =>
-      obj.id === this.currentTask.id ? (obj = {...this.currentTask}) : obj,
-    );
+  // Save changed task details
+  updateTaskDetails() {
+    if (this.homeStore.isToDoListLoaded) {
+      this.homeStore.saveListInDB(
+        this.homeStore.toDoList.map(obj =>
+          obj.id === this.currentTask.id ? (obj = {...this.currentTask}) : obj,
+        ),
+      );
+    }
   }
 
   deleteTask(idToRemove: string) {
-    this.homeStore.toDoList = this.homeStore.toDoList.filter(
-      el => el.id !== idToRemove,
-    );
+    if (this.homeStore.isToDoListLoaded) {
+      this.homeStore.saveListInDB(
+        this.homeStore.toDoList.filter(el => el.id !== idToRemove),
+      );
+    }
   }
 }
 
