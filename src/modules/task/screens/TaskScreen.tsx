@@ -21,7 +21,7 @@ const TaskScreen = ({navigation, route}: TaskPageProps) => {
 
   const onEditClickHandler = () => {
     if (isEditing) {
-      taskStore.saveChangesInTask();
+      taskStore.updateTaskDetails();
       ToastAndroid.show('Task saved!', ToastAndroid.SHORT);
     }
     setIsEditing(isEditing => !isEditing);

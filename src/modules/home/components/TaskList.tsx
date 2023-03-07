@@ -6,11 +6,16 @@ import {FlatList} from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../../App';
 import TaskItem from './TaskItem';
+import {useEffect} from 'react';
 
 type HomePageProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 const TaskList = observer(({navigation}: HomePageProps) => {
   const homeStore = useHomeStore();
+
+  useEffect(() => {
+    homeStore.getListFromDB();
+  }, []);
 
   const renderItem = ({item}: {item: Task}) => {
     return <TaskItem task={item} navigation={navigation} />;
