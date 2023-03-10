@@ -2,6 +2,7 @@ import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {glStyles} from '../styles/style';
 import {Modal} from 'react-native';
+import {TouchableOpacity, TouchableWithoutFeedback} from 'react-native';
 
 type IModalContainerProps = {
   children?: React.ReactNode;
@@ -19,7 +20,8 @@ export const ModalContainer = ({
     visible={visible}
     onRequestClose={onRequestClose}
     transparent>
-    <SafeAreaView
+    <TouchableOpacity
+      onPressOut={onRequestClose}
       style={{
         flex: 1,
         flexDirection: 'column',
@@ -27,7 +29,9 @@ export const ModalContainer = ({
         alignItems: 'center',
         backgroundColor: 'rgba(0, 0, 0, 0.4)',
       }}>
-      <SafeAreaView style={glStyles.modalContainer}>{children}</SafeAreaView>
-    </SafeAreaView>
+      <TouchableWithoutFeedback onPress={() => {}}>
+        <SafeAreaView style={glStyles.modalContainer}>{children}</SafeAreaView>
+      </TouchableWithoutFeedback>
+    </TouchableOpacity>
   </Modal>
 );
