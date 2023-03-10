@@ -9,6 +9,11 @@ export const glStyles = StyleSheet.create({
   section: {
     marginVertical: 15,
   },
+  modalContainer: {
+    backgroundColor: 'white',
+    width: '80%',
+    padding: 16,
+  },
   textInput: {
     backgroundColor: '#ffffff',
     color: '#555555',
