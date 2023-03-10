@@ -30,6 +30,7 @@ const AddTask = () => {
     homeStore.addNewTask(addTaskTitleText, addDescriptionText);
     setAddTaskTitleText('');
     setAddDescriptionText('');
+    onBtnHideModal();
   };
 
   return (
@@ -65,6 +66,7 @@ const AddTask = () => {
           inputValue={addDescriptionText}
           placeholder="Add new task description..."
           editable={true}
+          multiline
         />
         <Button onPress={onCreateTaskClickHandler} title={'Add task'} />
       </ModalContainer>
