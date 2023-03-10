@@ -3,6 +3,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {glStyles} from '../styles/style';
 import {Modal} from 'react-native';
 import {TouchableOpacity, TouchableWithoutFeedback} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 type IModalContainerProps = {
   children?: React.ReactNode;
@@ -30,7 +31,16 @@ export const ModalContainer = ({
         backgroundColor: 'rgba(0, 0, 0, 0.4)',
       }}>
       <TouchableWithoutFeedback onPress={() => {}}>
-        <SafeAreaView style={glStyles.modalContainer}>{children}</SafeAreaView>
+        <SafeAreaView style={glStyles.modalContainer}>
+          {/* X button */}
+          <Icon
+            name="close"
+            size={30}
+            onPress={onRequestClose}
+            style={{position: 'absolute', right: 5, top: 5}}
+          />
+          {children}
+        </SafeAreaView>
       </TouchableWithoutFeedback>
     </TouchableOpacity>
   </Modal>

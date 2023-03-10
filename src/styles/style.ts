@@ -12,8 +12,17 @@ export const glStyles = StyleSheet.create({
   modalContainer: {
     backgroundColor: 'white',
     width: '80%',
-    padding: 16,
+    paddingTop: 32,
+    paddingHorizontal: 16,
+    paddingBottom: 16,
   },
+
+  titleText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+
   textInput: {
     backgroundColor: '#ffffff',
     color: '#555555',
@@ -38,6 +47,7 @@ export const glStyles = StyleSheet.create({
     borderRadius: 10,
     alignSelf: 'center',
   },
+
   defaultBtnContainer: {
     backgroundColor: '#009688',
     borderRadius: 10,

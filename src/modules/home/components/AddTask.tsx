@@ -1,12 +1,15 @@
 import {useHomeStore} from '../store/HomeStore';
 import {useState} from 'react';
-import FieldWithButton from '../../../ui/FieldWithButton';
 import {ModalContainer} from '../../../ui/ModalContainer';
 import {Button} from '../../../ui/Button';
+import TextField from '../../../ui/TextField';
+import {Text} from 'react-native';
+import {glStyles} from '../../../styles/style';
 
 const AddTask = () => {
   const homeStore = useHomeStore();
-  const [addTaskText, setAddTaskText] = useState('');
+  const [addTaskTitleText, setAddTaskTitleText] = useState('');
+  const [addDescriptionText, setAddDescriptionText] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const onBtnShowModal = () => {
@@ -16,25 +19,37 @@ const AddTask = () => {
     setIsModalVisible(false);
   };
 
-  const onClickHandler = () => {
-    homeStore.addNewTask(addTaskText);
-    setAddTaskText('');
+  const onChangeTitleHandler = (newText: string) => {
+    setAddTaskTitleText(newText);
   };
-
-  const onChangeHandler = (newText: string) => setAddTaskText(newText);
+  const onChangeDescriptionHandler = (newText: string) => {
+    setAddDescriptionText(newText);
+  };
+  const onCreateTaskClickHandler = () => {
+    homeStore.addNewTask(addTaskTitleText, addDescriptionText);
+    setAddTaskTitleText('');
+    setAddDescriptionText('');
+  };
 
   return (
     <>
       <Button onPress={onBtnShowModal} title={'Add new task'} />
+
       <ModalContainer visible={isModalVisible} onRequestClose={onBtnHideModal}>
-        <Button onPress={onBtnHideModal} title={'Hide'} />
-        <FieldWithButton
-          onChangeText={onChangeHandler}
-          inputValue={addTaskText}
-          placeholder="Add a new task..."
-          onBtnPress={onClickHandler}
-          title="Add task"
+        <Text style={glStyles.titleText}>Add new task</Text>
+        <TextField
+          onChangeText={onChangeTitleHandler}
+          inputValue={addTaskTitleText}
+          placeholder="Add new task title..."
+          editable={true}
         />
+        <TextField
+          onChangeText={onChangeDescriptionHandler}
+          inputValue={addDescriptionText}
+          placeholder="Add new task description..."
+          editable={true}
+        />
+        <Button onPress={onCreateTaskClickHandler} title={'Add task'} />
       </ModalContainer>
     </>
   );

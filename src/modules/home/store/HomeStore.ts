@@ -61,14 +61,14 @@ class HomeStore {
   };
 
   // SET new task to to-do-list
-  addNewTask = (taskTitle: string) => {
+  addNewTask = (taskTitle: string, taskDescription: string) => {
     if (this.isToDoListLoaded && taskTitle) {
       this.saveListInDB([
         ...this.toDoList,
         {
           id: uuid(),
           task: taskTitle,
-          description: '',
+          description: taskDescription,
           priority: 0,
           completed: false,
         },
