@@ -15,6 +15,7 @@ export const glStyles = StyleSheet.create({
     paddingTop: 32,
     paddingHorizontal: 16,
     paddingBottom: 16,
+    borderRadius: 10,
   },
 
   titleText: {

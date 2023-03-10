@@ -37,7 +37,13 @@ export const ModalContainer = ({
             name="close"
             size={30}
             onPress={onRequestClose}
-            style={{position: 'absolute', right: 5, top: 5}}
+            style={{
+              textAlign: 'center',
+              verticalAlign: 'middle',
+              position: 'absolute',
+              right: 5,
+              top: 5,
+            }}
           />
           {children}
         </SafeAreaView>

@@ -5,6 +5,7 @@ import {Button} from '../../../ui/Button';
 import TextField from '../../../ui/TextField';
 import {Text} from 'react-native';
 import {glStyles} from '../../../styles/style';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 const AddTask = () => {
   const homeStore = useHomeStore();
@@ -33,7 +34,23 @@ const AddTask = () => {
 
   return (
     <>
-      <Button onPress={onBtnShowModal} title={'Add new task'} />
+      {/* + button */}
+      <Icon
+        name="pluscircle"
+        size={70}
+        onPress={onBtnShowModal}
+        style={{
+          textAlign: 'center',
+          verticalAlign: 'middle',
+          color: '#009688',
+          backgroundColor: 'white',
+          borderRadius: 100,
+          position: 'absolute',
+          right: 20,
+          bottom: 20,
+          zIndex: 9999,
+        }}
+      />
 
       <ModalContainer visible={isModalVisible} onRequestClose={onBtnHideModal}>
         <Text style={glStyles.titleText}>Add new task</Text>
